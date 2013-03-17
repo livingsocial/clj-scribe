@@ -1,39 +1,3 @@
-# clj-scribe
-
-A Clojure client for the Scribe log server.
-
-## Installation
-
-Add the following to your lein dependencies:
-
-    [livingsocial/clj-scribe "0.2.0"]
-
-## Usage
-
-    (require '[clj-scribe :as scribe])
-  
-    (scribe/setup :host "localhost" :port 1463 :category "my-app")
-
-By default, errors communicating with Scribe are written to standard error. You can
-override the error handling with your own function that takes the category,
-messages and the Exception encountered.
-
-    (scribe/setup :host "localhost"
-                  :port 1463
-                  :category "my-app"
-                  :error-handler (fn [category messages exception]
-                                   (println "I'm good at handling errors!")))
-
-The log function takes a sequence of message Strings:
-
-    (scribe/log ["This is a message."
-                 "This is some other message."
-                 "Etc."])
-
-## License
-
-This software is released under the MIT license:
-
 Copyright (C) 2013, LivingSocial, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
