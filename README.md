@@ -6,29 +6,36 @@ A Clojure client for the Scribe log server.
 
 Add the following to your lein dependencies:
 
-    [livingsocial/clj-scribe "0.2.0"]
+    [livingsocial/clj-scribe "0.3.0"]
 
 ## Usage
 
+Create a thread-safe logger that writes to Scribe asynchronously via an Agent.
+
     (require '[clj-scribe :as scribe])
   
-    (scribe/setup :host "localhost" :port 1463 :category "my-app")
+    (def logger (scribe/async-logger :host "localhost" :port 1463 :category "my-app"))
+
+The log function takes a sequence of message Strings:
+
+    (scribe/log logger ["This is a message."
+                        "This is some other message."
+                        "Etc."])
 
 By default, errors communicating with Scribe are written to standard error. You can
 override the error handling with your own function that takes the category,
 messages and the Exception encountered.
 
-    (scribe/setup :host "localhost"
-                  :port 1463
-                  :category "my-app"
-                  :error-handler (fn [category messages exception]
-                                   (println "I'm good at handling errors!")))
+    (scribe/async-logger :host "localhost"
+                         :port 1463
+                         :category "my-app"
+                         :error-handler (fn [category messages exception]
+                                          (println "I'm good at handling errors!")))
 
-The log function takes a sequence of message Strings:
+Sychronrous loggers that block on completion of the log call are also supported when
+you need access to the result.
 
-    (scribe/log ["This is a message."
-                 "This is some other message."
-                 "Etc."])
+    (scribe/sync-logger :host "localhost" :port 1463 :category "my-app")
 
 ## License
 
