@@ -70,3 +70,13 @@
   (when (blank? category)
     (throw (IllegalArgumentException. "A default category is required.")))
   (SyncLogger. host port category nil))
+
+(deftype MockLogger []
+  Logger
+  (log [logger messages])
+  (log [logger category messages]))
+
+(defn mock-logger
+  "Create an implementation of Logger that doesn't actually log anything. Useful for mocking in a test environment."
+  []
+  (MockLogger.))

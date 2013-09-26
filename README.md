@@ -6,7 +6,7 @@ A Clojure client for the Scribe log server.
 
 Add the following to your lein dependencies:
 
-    [clj-scribe "0.3.0"]
+    [clj-scribe "0.3.1"]
 
 ## Usage
 

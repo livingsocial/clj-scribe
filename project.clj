@@ -1,4 +1,4 @@
-(defproject clj-scribe "0.3.0"
+(defproject clj-scribe "0.3.1"
   :description "A Scribe log server client"
   :url "http://github.com/livingsocial/clj-scribe"
   :license {:name "MIT" :url "http://opensource.org/licenses/MIT"}
